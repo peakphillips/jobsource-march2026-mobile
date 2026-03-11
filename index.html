@@ -822,27 +822,31 @@ function render() {
   });
 }
 
-// Filter buttons
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeSector = btn.dataset.sector;
-    render();
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeSector = btn.dataset.sector;
+      render();
+    });
   });
-});
 
-// Search
-let debounce;
-document.getElementById('searchInput').addEventListener('input', e => {
-  clearTimeout(debounce);
-  debounce = setTimeout(() => {
-    searchTerm = e.target.value;
-    render();
-  }, 200);
-});
+  // Search
+  var debounce;
+  document.getElementById('searchInput').addEventListener('input', function(e) {
+    clearTimeout(debounce);
+    debounce = setTimeout(function() {
+      searchTerm = e.target.value;
+      render();
+    }, 200);
+  });
 
-render();
+  render();
+
+});
 </script>
 </body>
 </html>
